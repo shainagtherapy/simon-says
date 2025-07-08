@@ -1,5 +1,5 @@
 /*-------------------------------- Constants --------------------------------*/
-const buttonColors = ['blue', 'yellow', 'green', 'red'];
+const colors = ['blue', 'yellow', 'green', 'red'];
 // push random to add to array each turn?
 
 /*-------------------------------- Variables --------------------------------*/
@@ -11,18 +11,25 @@ const buttonColors = ['blue', 'yellow', 'green', 'red'];
 
 // let player;
 // let winner;
-
-
+// message;
+let sequence = colors[''];
+let playerSequence;
+let isPlayerTurn = false;
+console.log(sequence)
+console.log(isPlayerTurn)
 
 /*------------------------ Cached Element References ------------------------*/
 
-const playButtons = document.querySelectorAll('.button');
+const colorButtons = document.querySelectorAll('.color');
 const messageStatus = document.querySelector('#message');
+const startButton = document.querySelector('#start')
+console.log(messageStatus)
+console.log(startButton)
 
 /*----------------------------- Event Listeners -----------------------------*/
-buttonColors.addEventListener('click', (event)) => {
+// buttonColors.addEventListener('click', (event)) => {
 
-}
+// }
 
 // click event for button colors:
 // buttonColors.addEventListener('click', colorClick);
@@ -32,16 +39,20 @@ buttonColors.addEventListener('click', (event)) => {
 //     currentInput += buttonColors;
 // }
 // console.log(colorClick)
+// playButtons.addEventListener('click', () => {
+    
+// })
 
 /*-------------------------------- Functions --------------------------------*/
 
 // main sequence loop
-function getRandom() {
-    const randomColor = buttonColors[Math.floor(Math.random) * buttonColors.length]
+// function getRandom(randomColor) {
+//     let randomColor = Math.floor(Math.random() * buttonColors.length);
+//     getRandom.push(buttonColors)
     // const randomIndex = // equation for random color?
     // renturn buttonColors[randomIndex];
-}
-
+// }
+// console.log(randomColor)
 // flash function:
 // function buttonFlash() {
 // }
