@@ -22,6 +22,7 @@ Pseudocode:
     // THEN the use responds with the first, second, then third color button
 
 // process repeats of computer adding a color button to grow the sequence
+// should each sequence round be a level, or have a number to track?
 
 // define a const for yellow, purple and blue button
 // define a variable for computer's choice
