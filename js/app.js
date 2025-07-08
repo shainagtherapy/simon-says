@@ -20,19 +20,24 @@ const playButtons = document.querySelectorAll('.button');
 const messageStatus = document.querySelector('#message');
 
 /*----------------------------- Event Listeners -----------------------------*/
+buttonColors.addEventListener('click', (event)) => {
+
+}
 
 // click event for button colors:
-buttonColors.addEventListener('click', colorClick);
+// buttonColors.addEventListener('click', colorClick);
 
-function colorClick(event) {
-    const colorIndex = event.target.id;
-}
-console.log(colorClick)
+// function colorClick(event) {
+//     const colorIndex = event.target.id;
+//     currentInput += buttonColors;
+// }
+// console.log(colorClick)
 
 /*-------------------------------- Functions --------------------------------*/
 
 // main sequence loop
 function getRandom() {
+    const randomColor = buttonColors[Math.floor(Math.random) * buttonColors.length]
     // const randomIndex = // equation for random color?
     // renturn buttonColors[randomIndex];
 }
