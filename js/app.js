@@ -12,8 +12,8 @@ const colorsArray = ['blue', 'yellow', 'green', 'red'];
 // let player;
 // let winner;
 // message;
-// random color?
-let sequence = [''];
+
+//getRandom;
 let playerSequence = [];
 let isPlayerTurn = false;
 
@@ -50,9 +50,6 @@ const startButton = document.querySelector('#start')
 
 // }
 
-// function playSequence() {
-//     let delay = 0;
-
 //     sequence.forEach((color, index)) => {
 //         setTimeout(() => {
 //             flash(color);
@@ -71,14 +68,19 @@ function startGame() {
     nextRound(); //defined below
 }
 
-function nextRound() {
+function getRandom() {
     const randomColor = colorsArray[Math.floor(Math.random() * colorsArray.length)];
-    sequence.push(randomColor);
-    playerSequence = [];
-    isPlayerTurn = false;
-    messageStatus = "Repeat the sequence...";
-   // playSequence(); still needs defined;
+    return buttonColors[randomColor];
 }
+
+function updateSequence(){
+    randomColor.push(randomColor)
+}
+//     sequence.push(randomColor);
+//     playerSequence = [];
+//     isPlayerTurn = false;
+//     messageStatus = "Repeat the sequence...";
+// }
 
 // main sequence loop
 // function randomColor() {
