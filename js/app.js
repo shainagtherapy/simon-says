@@ -12,8 +12,7 @@ const colorsArray = ['blue', 'yellow', 'green', 'red'];
 // let player;
 // let winner;
 // message;
-
-//getRandom;
+// getRandom;
 let playerSequence = [];
 let isPlayerTurn = false;
 
@@ -57,6 +56,8 @@ const startButton = document.querySelector('#start')
 //         })
 //     })
 // }
+//ACTIVE BLOCK:
+
 
 startButton.addEventListener('click', startGame);
 
@@ -65,17 +66,69 @@ function startGame() {
     playerSequence = [""];
     isPlayerTurn = false;
    // messageStatus= 'Watch the pattern...'; *********** something isn't working with message
-    nextRound(); //defined below
+   nextRound(); //defined below
 }
 
-function getRandom() {
+function nextRound() {
     const randomColor = colorsArray[Math.floor(Math.random() * colorsArray.length)];
-    return buttonColors[randomColor];
+    sequence.push(randomColor);
+    isPlayerTurn = false;
+    // messageStatus = 'Watch the pattern...';
+    //playSequence();
 }
 
-function updateSequence(){
-    randomColor.push(randomColor)
+function playSequence() {
+
 }
+colorButtons.forEach(function(color) {
+color.addEventListener('click', playSequence);
+    if (!isPlayerTurn);
+    const choice = color.id;
+    playerSequence.push(choice);
+
+    console.log(choice)
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// GRAVEYARDDDDDD
+
+// function getRandom() {
+//     const randomColor = colorsArray[Math.floor(Math.random() * colorsArray.length)];
+//     return buttonColors[randomColor];
+// }
+
+// function updateSequence(){
+//     colorsArray.push(randomColor)
+// }
+
+
 //     sequence.push(randomColor);
 //     playerSequence = [];
 //     isPlayerTurn = false;
