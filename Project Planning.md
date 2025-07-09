@@ -1,4 +1,4 @@
-# simon-bop-it
+# simon-says
 Simon Bop-It Browser-Based Game
 Simon Project Planning Deliverable
 
@@ -9,20 +9,24 @@ I want to clearly see and hear which buttons the computer is pressing.
 I want to hear a noise played with each button press.
 I want to see a visible response to my button being pressed.
 I want a clear message when I've made a mistake, ending the game.
-I want to play play another round.
+I want to play another round.
 
 Pseudocode:
-// user landing page with yellow, purple, and blue buttons
+// user landing page with color buttons.
+
 // user initializes the game to start
+
 // game begins by computer choosing one color button
     // THEN the user respond with the same button
-// computer chooses another color button
-    // THEN the user responds with the first button, followed by the second
+
+// computer plays first color + another color button
+    // THEN the user responds with the same sequence
+
 // computer chooses another color button
     // THEN the use responds with the first, second, then third color button
 
 // process repeats of computer adding a color button to grow the sequence
-// should each sequence round be a level, or have a number to track?
+// ***should each sequence round be a level, or have a number to track?***
 
 // define a const for yellow, purple and blue button
 // define a variable for computer's choice

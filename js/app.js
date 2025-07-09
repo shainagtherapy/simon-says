@@ -13,13 +13,14 @@ const colorsArray = ['blue', 'yellow', 'green', 'red'];
 // let winner;
 // message;
 // getRandom;
-let playerSequence = [];
-let isPlayerTurn = false;
+// let computerSequence
+// let playerSequence
+let isPlayerTurn
 
 /*------------------------ Cached Element References ------------------------*/
 
-const colorButtons = document.querySelectorAll('.color');
-// const messageStatus = document.querySelector('#message');
+const colorButtons = document.querySelectorAll('.colorbutton');
+const messageStatus = document.querySelector('#message');
 const startButton = document.querySelector('#start')
 
 
@@ -59,35 +60,48 @@ const startButton = document.querySelector('#start')
 //ACTIVE BLOCK:
 
 
-startButton.addEventListener('click', startGame);
+startButton.addEventListener('click', computerSequence);
 
-function startGame() {
-    sequence = [];
-    playerSequence = [""];
-    isPlayerTurn = false;
-   // messageStatus= 'Watch the pattern...'; *********** something isn't working with message
-   nextRound(); //defined below
+// function computerSequence() {
+//     sequence = [];
+//     isPlayerTurn = false;
+//     const randomColor = colorsArray[Math.floor(Math.random() * colorsArray.length)];
+//     sequence.push(randomColor);
+//    // messageStatus= 'Watch the pattern...'; *********** something isn't working with message
+//    playerSequence(); //defined below
+// }
+
+
+document.querySelector('#blue').addEventListener('click', play);
+document.querySelector('#yellow').addEventListener('click', play);
+document.querySelector('#green').addEventListener('click', play);
+document.querySelector('#red').addEventListener('click', play);
+
+const play = (event) => {
+    console.log(event.target);
 }
 
-function nextRound() {
-    const randomColor = colorsArray[Math.floor(Math.random() * colorsArray.length)];
-    sequence.push(randomColor);
-    isPlayerTurn = false;
+
+function playerSequence() {
+    isPlayerTurn = true;
+    
     // messageStatus = 'Watch the pattern...';
     //playSequence();
 }
 
-function playSequence() {
-
+for (let i = 0; i < colorsArray.length; i ++) {
+    colorsArray[i].addEventListener("click", playerChoice);
 }
+
 colorButtons.forEach(function(color) {
 color.addEventListener('click', playSequence);
     if (!isPlayerTurn);
     const choice = color.id;
-    playerSequence.push(choice);
 
     console.log(choice)
 })
+
+
 
 
 
