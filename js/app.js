@@ -15,6 +15,8 @@ let isPlayerTurn
 
 const colorButtons = document.querySelector('.gameboard');
 
+const colorPanels = document.querySelectorAll('.color');
+
 const messageStatus = document.querySelector('#message');
 
 const startButton = document.querySelector('#start')
@@ -36,32 +38,42 @@ function startGame() {
     isPlayerTurn = false;
    // messageStatus = 'Watch the pattern...'; //*********** something isn't working with message
    addColorToSequence();
-   playerSequence(); //defined below
-   console.log()
+   playSequence(); //defined below
 }
 
 function addColorToSequence() {
     sequence.push(randomColor);
 }
 
+//FLASH COLOR TO PLAYSEQUENCE:
+function flash(event) {
+    //const colorId = document.getElementById(color);
+    event.target.style.backgroundColor = 'white';
+    setTimeout (() => {
+        event.target.removeAttribute('style');
+    }, 300);
+}
 
 
 function playSequence() {
-
+   colorPanels.forEach ((panel) => {
+    panel.style.backgroundColor = 'white';
+   })
+// play random selected sequence as a flash
+// call random color selected to apply background color change
+// timed/time out color change for "flash" affect    
 }
 
+// DO NOT DELETE!!!!!!!!!!!
+colorButtons.addEventListener('click', playerClick) // <---- THIS IS THE CORRECT EVENT LISTENER
 
 function playerClick (event) {
+    isPlayerTurn: true;
+    flash(event);
     console.log(event.target.id)
 }
+// !!!!!!!!!!!!!!!!!!!!!!!!!
 
-colorButtons.addEventListener('click', playerClick) 
-
-
-// document.querySelector('#blue').addEventListener('click', play);
-// document.querySelector('#yellow').addEventListener('click', play);
-// document.querySelector('#green').addEventListener('click', play);
-// document.querySelector('#red').addEventListener('click', play);
 
 const play = (event) => {
     console.log(event.target);
@@ -74,10 +86,6 @@ function playerSequence() {
     // messageStatus = 'Watch the pattern...';
     //playSequence();
 }
-
-// for (let i = 0; i < colorsArray.length; i ++) {
-//     colorsArray[i].addEventListener("click", playerChoice);
-// }
 
 // colorButtons.forEach(function(color) {
 // color.addEventListener('click', playSequence);
