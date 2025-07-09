@@ -1,81 +1,67 @@
+
 /*-------------------------------- Constants --------------------------------*/
+
+// user landing page with color buttons.
 const colorsArray = ['blue', 'yellow', 'green', 'red'];
-// push random to add to array each turn?
+
+// formula for random color pick - cross checked on MDN, Google & Chatgpt
+const randomColor = colorsArray[Math.floor(Math.random() * colorsArray.length)]
 
 /*-------------------------------- Variables --------------------------------*/
 
-// let blue;
-// let yellow;
-// let green;
-// let red;
-
-// let player;
-// let winner;
-// message;
-// getRandom;
-// let computerSequence
-// let playerSequence
 let isPlayerTurn
 
 /*------------------------ Cached Element References ------------------------*/
 
-const colorButtons = document.querySelectorAll('.colorbutton');
-const messageStatus = document.querySelector('#message');
-const startButton = document.querySelector('#start')
+const colorButtons = document.querySelector('.gameboard');
 
+const messageStatus = document.querySelector('#message');
+
+const startButton = document.querySelector('#start')
+// user initializes the game to start
 
 /*----------------------------- Event Listeners -----------------------------*/
-// buttonColors.addEventListener('click', (event)) => {
 
-// }
 
-// click event for button colors:
-// colorButtons.addEventListener('click', colorClick);
-
-// function flashing(color)) {
-//     const colorIndex = event.target.id;
-//     currentInput += buttonColors;
-// }
-// console.log(colorClick)
-// playButtons.addEventListener('click', () => {
-    
-// })
 
 /*-------------------------------- Functions --------------------------------*/
 
-// flash function:
-// function flash(color) {
-//     const button = document.getElementById(color);
-//     button.classList.add('active');
-
-// }
-
-//     sequence.forEach((color, index)) => {
-//         setTimeout(() => {
-//             flash(color);
-
-//         })
-//     })
-// }
-//ACTIVE BLOCK:
 
 
-startButton.addEventListener('click', computerSequence);
+startButton.addEventListener('click', startGame);
 
-// function computerSequence() {
-//     sequence = [];
-//     isPlayerTurn = false;
-//     const randomColor = colorsArray[Math.floor(Math.random() * colorsArray.length)];
-//     sequence.push(randomColor);
-//    // messageStatus= 'Watch the pattern...'; *********** something isn't working with message
-//    playerSequence(); //defined below
-// }
+// game begins by computer choosing one color button
+function startGame() {
+    sequence = [];
+    isPlayerTurn = false;
+   // messageStatus = 'Watch the pattern...'; //*********** something isn't working with message
+   addColorToSequence();
+   playerSequence(); //defined below
+   console.log()
+}
+
+function addColorToSequence() {
+    sequence.push(randomColor);
+}
 
 
-document.querySelector('#blue').addEventListener('click', play);
-document.querySelector('#yellow').addEventListener('click', play);
-document.querySelector('#green').addEventListener('click', play);
-document.querySelector('#red').addEventListener('click', play);
+
+function playSequence() {
+
+}
+
+
+function playerClick (event) {
+    console.log(event.target.id)
+}
+
+colorButtons.addEventListener('click', playerClick) 
+
+
+// document.querySelector('#blue').addEventListener('click', play);
+// document.querySelector('#yellow').addEventListener('click', play);
+// document.querySelector('#green').addEventListener('click', play);
+// document.querySelector('#red').addEventListener('click', play);
 
 const play = (event) => {
     console.log(event.target);
@@ -89,17 +75,17 @@ function playerSequence() {
     //playSequence();
 }
 
-for (let i = 0; i < colorsArray.length; i ++) {
-    colorsArray[i].addEventListener("click", playerChoice);
-}
+// for (let i = 0; i < colorsArray.length; i ++) {
+//     colorsArray[i].addEventListener("click", playerChoice);
+// }
 
-colorButtons.forEach(function(color) {
-color.addEventListener('click', playSequence);
-    if (!isPlayerTurn);
-    const choice = color.id;
+// colorButtons.forEach(function(color) {
+// color.addEventListener('click', playSequence);
+//     if (!isPlayerTurn);
+//     const choice = color.id;
 
-    console.log(choice)
-})
+//     console.log(choice)
+// })
 
 
 
