@@ -5,7 +5,7 @@
 const colorsArray = ['blue', 'yellow', 'green', 'red'];
 
 // formula for random color pick - cross checked on MDN, Google & Chatgpt
-const randomColor = colorsArray[Math.floor(Math.random() * colorsArray.length)]
+//const randomColor = colorsArray[Math.floor(Math.random() * colorsArray.length)]
 
 /*-------------------------------- Variables --------------------------------*/
 // gamestart:
@@ -25,13 +25,17 @@ const startButton = document.querySelector('#start')
 
 /*----------------------------- Event Listeners -----------------------------*/
 
+startButton.addEventListener('click', startGame);
 
+// DO NOT DELETE!!!!!!!!!!!
+colorButtons.addEventListener('click', playerClick) // <---- THIS IS THE CORRECT EVENT LISTENER
+// !!!!!!!!!!!!!!!!!!!!!!!!!
 
 /*-------------------------------- Functions --------------------------------*/
 
 
 
-startButton.addEventListener('click', startGame);
+
 
 // game begins by computer choosing one color button
 function startGame() {
@@ -39,18 +43,42 @@ function startGame() {
     playerSequence = []
     isPlayerTurn = false;
    messageStatus.textContent = 'Watch the pattern...'; //*********** something isn't working with message
-   addColorToSequence();
-   playSequence(); //defined below
-   isPlayerTurn = true;
+   updateSequence();
+   //nextSequence(); //defined below
 }
 
+// function getRandom() {
+//     const randomColor = colorsArray[Math.floor(Math.random() * colorsArray.length)]
+//     return colorsArray[randomColor];
+// }
 
-function addColorToSequence() {
+function updateSequence() {
     if (sequence.length < 100) {
-        const randomColor = colorsArray[Math.floor(Math.random() * colorsArray.length)];
-        sequence.push(randomColor);
-        console.log(sequence)
+    const randomColor = colorsArray[Math.floor(Math.random())];
+    sequence.push(randomColor);
+    isPlayerTurn = false;
+
+    console.log('new color added:', randomColor);
+    console.log('Sequence length:', sequence.length);
+    console.log('current sequence:', sequence);
     }
+}
+
+function nextSequence() {
+    updateSequence();
+
+    isPlayerTurn = false;
+    for (let i = 0; i < 100; i++) {
+        
+    colorDivs.forEach ((colorDiv) => {
+            if (colorDiv.id === sequence[i]) {
+                colorDiv.style.backgroundColor = 'white';
+                    setTimeout (() => {
+                        colorDiv.removeAttribute('style');
+                    }, 200)
+        }
+   })
+}
 }
 
 //FLASH COLOR TO PLAYERSEQUENCE:
@@ -64,49 +92,57 @@ function flash(event) {
 
 
 
-function playSequence() {
-    // addColorToSequence();
-    // for (let i = 0; i < 100; i++)
-        
-    colorDivs.forEach ((colorDiv) => {
-            if (colorDiv.id === sequence[0]) {
-                colorDiv.style.backgroundColor = 'white';
-                    setTimeout (() => {
-                        colorDiv.removeAttribute('style');
-                    }, 200)
-        }
-   })
-}
-
-// DO NOT DELETE!!!!!!!!!!!
-colorButtons.addEventListener('click', playerClick) // <---- THIS IS THE CORRECT EVENT LISTENER
-// !!!!!!!!!!!!!!!!!!!!!!!!!
-
+let i = 0;
 // player click pushes to array
 // player sequence < computer sequence then don't compare
 function playerClick (event) {
     isPlayerTurn = true;
 
     flash(event);
-    
-   // playerSequence.push(currentStep);
 
-    // const currentStep = playerSequence.length - 1;
-    // if (playerSequence[currentStep] !== sequence[currentStep]) {
+    playerSequence.push(event.target.id);
+
+    // console.log(currentStep)
+    console.log(playerSequence)
+    console.log(sequence)
+
+    playerSequence.forEach(() => {
+            if (playerSequence[i] === sequence[i]) {
+                messageStatus.textContent = "It's a match!"
+                isPlayerTurn = false;
+                i++;
+            } else {
+                messageStatus.textContent = "Wrong! Start Over"
+                isPlayerTurn = false;
+                i++;
+            }
+        })
+    
+
+    // if (playerSequence !== sequence) {
     //     messageStatus.textContent = "Wrong! Start Over"
     //     isPlayerTurn = false;
     //     return;
     // }
-    // if (playerSequence.length[currentStep] === sequence.length[currentStep]) 
+    // if (playerSequence.length === sequence.length)
     //     messageStatus.textContent = "Great Job! Watch closely...";
     //     isPlayerTurn = false;
     //     playerSequence = [];
-    //     playSequence();
-        // setTimeout(() => {
-        //     addColorToSequence();
-        //     playSequence();
-        // }, 1000);
+    //     updateSequence();
+    //     nextSequence();
+    //     // setTimeout(() => {
+    //     //     addColorToSequence();
+    //     //     playSequence();
+    //     // }, 1000);
     }
+
+   
+
+    // check for winner:
+    // foreach sequence
+    //    nest player sequence
+    //    if seq === player seq then establish winning/next round
+
 
 // colorButtons.forEach(function(color) {
 // color.addEventListener('click', playSequence);
