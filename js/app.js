@@ -39,10 +39,16 @@ function startGame() {
    messageStatus.textContent = 'Watch the pattern...'; //*********** something isn't working with message
    addColorToSequence();
    playSequence(); //defined below
+   playerClick();
+}
+
+function getRandomColor () {
+    return randomColor;
 }
 
 function addColorToSequence() {
     sequence.push(randomColor);
+    //console.log(sequence)
 }
 
 //FLASH COLOR TO PLAYERSEQUENCE:
@@ -54,12 +60,26 @@ function flash(event) {
     }, 200);
 }
 
+
+
 function playSequence() {
-   colorPanels.forEach ((panel) => {
-        panel.style.backgroundColor = 'black';
-        setTimeout (() => {
-            panel.removeAttribute('style');
-        }, 200);
+    getRandomColor();
+    addColorToSequence();
+    const sequenceLength = 100;
+    for (let i = 0; i < sequenceLength; i++)
+        
+    colorPanels.forEach ((panel) => {
+            if (panel.id === sequence[0]) {
+                panel.style.backgroundColor = 'white';
+                    setTimeout (() => {
+                        panel.removeAttribute('style');
+                    }, 200)
+        }
+
+    // panel.style.backgroundColor = 'black';
+    //     setTimeout (() => {
+    //         panel.removeAttribute('style');
+    //     }, 200);
     
    })
 // play random selected sequence as a flash
@@ -70,17 +90,17 @@ function playSequence() {
 // DO NOT DELETE!!!!!!!!!!!
 colorButtons.addEventListener('click', playerClick) // <---- THIS IS THE CORRECT EVENT LISTENER
 // !!!!!!!!!!!!!!!!!!!!!!!!!
+
+// player click pushes to array
+// player sequence < computer sequence then don't compare
 function playerClick (event) {
     if (!isPlayerTurn) {
         return;
     }
-    const clickedColor = event.target.id;
 
-    flash(clickedColor);
+    flash(event);
     
-    playerSequence.push(clickedColor);
-
-    console.log(playerSequence)
+    playerSequence.push(currentStep);
 
     const currentStep = playerSequence.length - 1;
     if (playerSequence[currentStep] !== sequence[currentStep]) {
@@ -89,16 +109,16 @@ function playerClick (event) {
         setTimeout(startGame, 1000);
         return;
     }
-    if (playerSequence.length === sequence.length) 
+    if (playerSequence.length[currentStep] === sequence.length[currentStep]) 
         messageStatus.textContent = "Great Job! Watch closely...";
         isPlayerTurn = false;
         playerSequence = [];
-        setTimeout(() => {
-            addColorToSequence();
-            playSequence();
-        }, 1000);
+        playSequence();
+        // setTimeout(() => {
+        //     addColorToSequence();
+        //     playSequence();
+        // }, 1000);
     }
-
 
 // colorButtons.forEach(function(color) {
 // color.addEventListener('click', playSequence);
