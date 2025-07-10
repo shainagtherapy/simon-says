@@ -44,7 +44,7 @@ function startGame() {
     isPlayerTurn = false;
    messageStatus.textContent = 'Watch the pattern...'; //*********** something isn't working with message
    updateSequence();
-   //nextSequence(); //defined below
+   nextSequence(); //defined below
 }
 
 // function getRandom() {
@@ -65,7 +65,7 @@ function updateSequence() {
 }
 
 function nextSequence() {
-    updateSequence();
+//     updateSequence();
 
     isPlayerTurn = false;
     for (let i = 0; i < 100; i++) {
@@ -110,11 +110,12 @@ function playerClick (event) {
             if (playerSequence[i] === sequence[i]) {
                 messageStatus.textContent = "It's a match!"
                 isPlayerTurn = false;
+                console.log("it's a match!")
                 i++;
             } else {
                 messageStatus.textContent = "Wrong! Start Over"
                 isPlayerTurn = false;
-                i++;
+                console.log('not a match');
             }
         })
     
