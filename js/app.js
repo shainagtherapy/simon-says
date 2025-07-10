@@ -36,7 +36,7 @@ startButton.addEventListener('click', startGame);
 function startGame() {
     sequence = [];
     isPlayerTurn = false;
-   // messageStatus = 'Watch the pattern...'; //*********** something isn't working with message
+   messageStatus.textContent = 'Watch the pattern...'; //*********** something isn't working with message
    addColorToSequence();
    playSequence(); //defined below
 }
@@ -45,19 +45,22 @@ function addColorToSequence() {
     sequence.push(randomColor);
 }
 
-//FLASH COLOR TO PLAYSEQUENCE:
+//FLASH COLOR TO PLAYERSEQUENCE:
 function flash(event) {
     //const colorId = document.getElementById(color);
-    event.target.style.backgroundColor = 'white';
+    event.target.style.backgroundColor = 'black';
     setTimeout (() => {
         event.target.removeAttribute('style');
-    }, 300);
+    }, 200);
 }
-
 
 function playSequence() {
    colorPanels.forEach ((panel) => {
-    panel.style.backgroundColor = 'white';
+        panel.style.backgroundColor = 'black';
+        setTimeout (() => {
+            panel.removeAttribute('style');
+        }, 200);
+    
    })
 // play random selected sequence as a flash
 // call random color selected to apply background color change
@@ -66,26 +69,36 @@ function playSequence() {
 
 // DO NOT DELETE!!!!!!!!!!!
 colorButtons.addEventListener('click', playerClick) // <---- THIS IS THE CORRECT EVENT LISTENER
-
-function playerClick (event) {
-    isPlayerTurn: true;
-    flash(event);
-    console.log(event.target.id)
-}
 // !!!!!!!!!!!!!!!!!!!!!!!!!
+function playerClick (event) {
+    if (!isPlayerTurn) {
+        return;
+    }
+    const clickedColor = event.target.id;
 
-
-const play = (event) => {
-    console.log(event.target);
-}
-
-
-function playerSequence() {
-    isPlayerTurn = true;
+    flash(clickedColor);
     
-    // messageStatus = 'Watch the pattern...';
-    //playSequence();
-}
+    playerSequence.push(clickedColor);
+
+    console.log(playerSequence)
+
+    const currentStep = playerSequence.length - 1;
+    if (playerSequence[currentStep] !== sequence[currentStep]) {
+        messageStatus.textContent = "Wrong! Start Over"
+        isPlayerTurn = false;
+        setTimeout(startGame, 1000);
+        return;
+    }
+    if (playerSequence.length === sequence.length) 
+        messageStatus.textContent = "Great Job! Watch closely...";
+        isPlayerTurn = false;
+        playerSequence = [];
+        setTimeout(() => {
+            addColorToSequence();
+            playSequence();
+        }, 1000);
+    }
+
 
 // colorButtons.forEach(function(color) {
 // color.addEventListener('click', playSequence);
@@ -165,4 +178,4 @@ function playerSequence() {
 
 // sound function:
 // function playSound () { ***REFER TO DOM LEVEL UP
-// } 
+// }
