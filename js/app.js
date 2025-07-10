@@ -8,18 +8,19 @@ const colorsArray = ['blue', 'yellow', 'green', 'red'];
 const randomColor = colorsArray[Math.floor(Math.random() * colorsArray.length)]
 
 /*-------------------------------- Variables --------------------------------*/
-
+// gamestart:
+let sequence = [];
+let playerSequence = [];
 let isPlayerTurn
 
 /*------------------------ Cached Element References ------------------------*/
 
 const colorButtons = document.querySelector('.gameboard');
 
-const colorPanels = document.querySelectorAll('.color');
-
+const colorDivs = document.querySelectorAll('.color');
 const messageStatus = document.querySelector('#message');
-
 const startButton = document.querySelector('#start')
+
 // user initializes the game to start
 
 /*----------------------------- Event Listeners -----------------------------*/
@@ -35,20 +36,21 @@ startButton.addEventListener('click', startGame);
 // game begins by computer choosing one color button
 function startGame() {
     sequence = [];
+    playerSequence = []
     isPlayerTurn = false;
    messageStatus.textContent = 'Watch the pattern...'; //*********** something isn't working with message
    addColorToSequence();
    playSequence(); //defined below
-   playerClick();
+   isPlayerTurn = true;
 }
 
-function getRandomColor () {
-    return randomColor;
-}
 
 function addColorToSequence() {
-    sequence.push(randomColor);
-    //console.log(sequence)
+    if (sequence.length < 100) {
+        const randomColor = colorsArray[Math.floor(Math.random() * colorsArray.length)];
+        sequence.push(randomColor);
+        console.log(sequence)
+    }
 }
 
 //FLASH COLOR TO PLAYERSEQUENCE:
@@ -63,28 +65,17 @@ function flash(event) {
 
 
 function playSequence() {
-    getRandomColor();
-    addColorToSequence();
-    const sequenceLength = 100;
-    for (let i = 0; i < sequenceLength; i++)
+    // addColorToSequence();
+    // for (let i = 0; i < 100; i++)
         
-    colorPanels.forEach ((panel) => {
-            if (panel.id === sequence[0]) {
-                panel.style.backgroundColor = 'white';
+    colorDivs.forEach ((colorDiv) => {
+            if (colorDiv.id === sequence[0]) {
+                colorDiv.style.backgroundColor = 'white';
                     setTimeout (() => {
-                        panel.removeAttribute('style');
+                        colorDiv.removeAttribute('style');
                     }, 200)
         }
-
-    // panel.style.backgroundColor = 'black';
-    //     setTimeout (() => {
-    //         panel.removeAttribute('style');
-    //     }, 200);
-    
    })
-// play random selected sequence as a flash
-// call random color selected to apply background color change
-// timed/time out color change for "flash" affect    
 }
 
 // DO NOT DELETE!!!!!!!!!!!
@@ -94,26 +85,23 @@ colorButtons.addEventListener('click', playerClick) // <---- THIS IS THE CORRECT
 // player click pushes to array
 // player sequence < computer sequence then don't compare
 function playerClick (event) {
-    if (!isPlayerTurn) {
-        return;
-    }
+    isPlayerTurn = true;
 
     flash(event);
     
-    playerSequence.push(currentStep);
+   // playerSequence.push(currentStep);
 
-    const currentStep = playerSequence.length - 1;
-    if (playerSequence[currentStep] !== sequence[currentStep]) {
-        messageStatus.textContent = "Wrong! Start Over"
-        isPlayerTurn = false;
-        setTimeout(startGame, 1000);
-        return;
-    }
-    if (playerSequence.length[currentStep] === sequence.length[currentStep]) 
-        messageStatus.textContent = "Great Job! Watch closely...";
-        isPlayerTurn = false;
-        playerSequence = [];
-        playSequence();
+    // const currentStep = playerSequence.length - 1;
+    // if (playerSequence[currentStep] !== sequence[currentStep]) {
+    //     messageStatus.textContent = "Wrong! Start Over"
+    //     isPlayerTurn = false;
+    //     return;
+    // }
+    // if (playerSequence.length[currentStep] === sequence.length[currentStep]) 
+    //     messageStatus.textContent = "Great Job! Watch closely...";
+    //     isPlayerTurn = false;
+    //     playerSequence = [];
+    //     playSequence();
         // setTimeout(() => {
         //     addColorToSequence();
         //     playSequence();
