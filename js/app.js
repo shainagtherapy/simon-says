@@ -37,7 +37,11 @@ colorButtons.addEventListener('click', playerClick) // <---- THIS IS THE CORRECT
 
 
 function render() {
-
+    sequence = [];
+    playerSequence = [];
+    isPlayerTurn = false;
+    level = 1;
+    
 }
 
 // computer begins by computer choosing one color button
@@ -45,13 +49,13 @@ function startGame() {
     sequence = [];
     playerSequence = []
     isPlayerTurn = false;
-   messageStatus.textContent = 'Watch the sequence...'; //*********** something isn't working with message
+   messageStatus.textContent = 'Watch the sequence...';
    updateSequence();
 }
 
 function updateSequence() {
     playerSequence = [];
-    isPlayerTurn = false;
+    isPlayerTurn !== true;
     messageStatus.textContent = "Watch the sequence..."
     if (sequence.length < 100) {
     const randomColor = colorsArray[Math.floor(Math.random() * colorsArray.length)];
@@ -98,10 +102,20 @@ function flash(color, flashColor, delay) {
 }
 
 
-// player click pushes to array
-// player sequence < computer sequence then don't compare
+function enableClick() {
+    colorButtons.addEventListener('click', playerClick)
+}
+
+function disableClick() {
+    colorButtons.removeEventListener('click', playerClick);
+}
+
+
+
 function playerClick (event) {
     isPlayerTurn = true;
+    
+    enableClick();
 
     const clickedColor = event.target.id;
     flash(clickedColor, 'black'); // player clicks color
@@ -113,17 +127,20 @@ function playerClick (event) {
     // WIN/LOSS LOGIC: *******************************************
     if (playerSequence[currentClick] != sequence[currentClick]) {
         messageStatus.textContent = "Wrong! Start Over...";
-        }
-    if (playerSequence.length < sequence.length) {
+        isPlayerTurn = false;
+        disableClick();
+        render();
+    } else if (playerSequence.length < sequence.length) {
         return;
-        }
-
-    if (playerSequence.length === sequence.length) {
+    } else if (playerSequence[currentClick] === sequence[currentClick] &&
+        playerSequence.length === sequence.length) {
         messageStatus.textContent = "It's a match!"
-        }
+        isPlayerTurn = false;
+        updateSequence()
+    }
     
-    updateSequence();
-    render();
+    // updateSequence();
+    // render();
 }
 
 
