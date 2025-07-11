@@ -45,7 +45,8 @@ function startGame() {
     sequence = [];
     playerSequence = []
     isPlayerTurn = false;
-   messageStatus.textContent = 'Watch the pattern...'; //*********** something isn't working with message
+    flash();
+   messageStatus.textContent = 'Watch the sequence...'; //*********** something isn't working with message
    updateSequence();
 }
 
@@ -56,72 +57,118 @@ function startGame() {
 
 function updateSequence() {
     playerSequence = [];
+    isPlayerTurn = false;
     if (sequence.length < 100) {
     const randomColor = colorsArray[Math.floor(Math.random() * colorsArray.length)];
     sequence.push(randomColor);
-    isPlayerTurn = false;
-    messageStatus.textContent = 'Watch the pattern...';
+
+    let delay = 0;
+    for (let i = 0; i < sequence.length; i++) {
+        setTimeout (() => {
+            flash(sequence[i], 'white'); // should flash white
+        }, delay); delay += 600;
+    }
         
     console.log('new color added:', randomColor);
     console.log('Sequence length:', sequence.length);
     console.log('current sequence:', sequence);
     }
+    
+    if (isPlayerTurn = true) ;
+        return messageStatus.textContent = "Repeat the sequence!";
 }
 
-function nextSequence() {
-//     updateSequence();
+// function computerFlash() {
+//     for (let i= 0; i < colorDivs.length; i++) {
+//         let delay = 0;
+//         if (colorDivs[i].id === sequence[i]) {
+//             colorDivs[i].style.backgroundColor = 'white';
+//             setTimeout(() => {
+//             colorDivs[i].removeAttribute('style');
+//         } , delay);
+//             delay += 600;
+//         console.log('selected', colorDivs[i])
+//         }
+//     }
+// }   // <-------- switched from forEach loop with help from chatgpt, much better for me!!!!!!
 
-    isPlayerTurn = false;
-    let delay = 0;
+// function nextSequence() {
+// //     updateSequence();
 
-    for (let i = 0; i < sequence.length; i++) {
-        
-    colorDivs.forEach ((colorDiv) => {
-        if (colorDiv.id === sequence[i]) {
-            colorDiv.style.backgroundColor = 'white';
-                setTimeout (() => {
-                    colorDiv.removeAttribute('style');
-                    }, 200)
-        }
-   })
-}
-}
+//     isPlayerTurn = false;
+//     let delay = 0;
+// }
 
 //FLASH COLOR TO PLAYERSEQUENCE:
-function flash(event) {
-    //const colorId = document.getElementById(color);
-    event.target.style.backgroundColor = 'black';
-    setTimeout (() => {
-        event.target.removeAttribute('style');
-    }, 200);
+// function Flash(event) {
+//     //const colorId = document.getElementById(color);
+//     event.target.style.backgroundColor = 'black';
+//     setTimeout (() => {
+//         event.target.removeAttribute('style');
+//     }, 200);
+// }
+
+function flash(color, flashColor) {
+    for (let i= 0; i < colorDivs.length; i++) {
+        if (colorDivs[i].id === color) {
+        colorDivs[i].style.backgroundColor = flashColor;
+
+        /* PLACEHOLDER FOR SOUND EFFECTS!!!!!!!
+        const soundeffect = new Audio(`sounds/${}.mp3`)
+        soundeffect.play();
+        */
+
+        setTimeout(() => {
+            colorDivs[i].removeAttribute('style');
+        }, 500);
+        console.log("color flashing:", flashColor)
+    }
+}
 }
 
 
-
-let i = 0;
 // player click pushes to array
 // player sequence < computer sequence then don't compare
 function playerClick (event) {
     isPlayerTurn = true;
+    messageStatus.textContent = "Repeat the sequence!";
 
-    flash(event);
     const clickedColor = event.target.id;
+    flash(clickedColor, 'black'); // player clicks color
+
     playerSequence.push(clickedColor);
 
-    const currentClick = playerSequence.length -1;
+    const currentClick = (playerSequence.length - 1);
 
-    //let i = 0; i++;
-    if (playerSequence.length === sequence.length &&
-        playerSequence[currentClick] === sequence[currentClick]) {
-        messageStatus.textContent = "it's a match!";
-        isPlayerTurn = false;
-        updateSequence();
-        nextSequence();
-    } else {
+    // WIN/LOSS LOGIC: *******************************************
+    if (playerSequence[currentClick] != sequence[currentClick]) {
         messageStatus.textContent = "Wrong! Start Over...";
-        isPlayerTurn = false;
-        render();
-    }
+        }
+    if (playerSequence.length < sequence.length) {
+        return;
+        }
+
+    if (playerSequence.length === sequence.length) {
+        messageStatus.textContent = "It's a match!"
+        }
+    
+    
+    updateSequence();
+
+    render();
+}
+
+    // if (playerSequence.length === sequence.length &&
+    //     playerSequence[currentClick] === sequence[currentClick]) {
+    //     messageStatus.textContent = "it's a match!";
+    //     isPlayerTurn = false;
+    //     updateSequence();
+
+    // } else {
+    //     messageStatus.textContent = "Wrong! Start Over...";
+    //     isPlayerTurn = false;
+    //     render();
+    // }
 
     // console.log(currentStep)
     //console.log(playerSequence)
@@ -158,7 +205,6 @@ function playerClick (event) {
     //     //     addColorToSequence();
     //     //     playSequence();
     //     // }, 1000);
-    }
 
    
 
