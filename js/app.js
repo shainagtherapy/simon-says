@@ -11,7 +11,8 @@ const colorsArray = ['blue', 'yellow', 'green', 'red'];
 // gamestart:
 let sequence = [];
 let playerSequence = [];
-let isPlayerTurn
+let isPlayerTurn;
+
 
 /*------------------------ Cached Element References ------------------------*/
 
@@ -35,7 +36,9 @@ colorButtons.addEventListener('click', playerClick) // <---- THIS IS THE CORRECT
 
 
 
-
+function render() {
+   
+}
 
 // game begins by computer choosing one color button
 function startGame() {
@@ -44,7 +47,6 @@ function startGame() {
     isPlayerTurn = false;
    messageStatus.textContent = 'Watch the pattern...'; //*********** something isn't working with message
    updateSequence();
-   nextSequence(); //defined below
 }
 
 // function getRandom() {
@@ -53,11 +55,13 @@ function startGame() {
 // }
 
 function updateSequence() {
+    playerSequence = [];
     if (sequence.length < 100) {
-    const randomColor = colorsArray[Math.floor(Math.random())];
+    const randomColor = colorsArray[Math.floor(Math.random() * colorsArray.length)];
     sequence.push(randomColor);
     isPlayerTurn = false;
-
+    messageStatus.textContent = 'Watch the pattern...';
+        
     console.log('new color added:', randomColor);
     console.log('Sequence length:', sequence.length);
     console.log('current sequence:', sequence);
@@ -68,13 +72,15 @@ function nextSequence() {
 //     updateSequence();
 
     isPlayerTurn = false;
-    for (let i = 0; i < 100; i++) {
+    let delay = 0;
+
+    for (let i = 0; i < sequence.length; i++) {
         
     colorDivs.forEach ((colorDiv) => {
-            if (colorDiv.id === sequence[i]) {
-                colorDiv.style.backgroundColor = 'white';
-                    setTimeout (() => {
-                        colorDiv.removeAttribute('style');
+        if (colorDiv.id === sequence[i]) {
+            colorDiv.style.backgroundColor = 'white';
+                setTimeout (() => {
+                    colorDiv.removeAttribute('style');
                     }, 200)
         }
    })
@@ -99,26 +105,43 @@ function playerClick (event) {
     isPlayerTurn = true;
 
     flash(event);
+    const clickedColor = event.target.id;
+    playerSequence.push(clickedColor);
 
-    playerSequence.push(event.target.id);
+    const currentClick = playerSequence.length -1;
+
+    //let i = 0; i++;
+    if (playerSequence.length === sequence.length &&
+        playerSequence[currentClick] === sequence[currentClick]) {
+        messageStatus.textContent = "it's a match!";
+        isPlayerTurn = false;
+        updateSequence();
+        nextSequence();
+    } else {
+        messageStatus.textContent = "Wrong! Start Over...";
+        isPlayerTurn = false;
+        render();
+    }
 
     // console.log(currentStep)
-    console.log(playerSequence)
-    console.log(sequence)
+    //console.log(playerSequence)
+    //console.log(sequence)
 
-    playerSequence.forEach(() => {
-            if (playerSequence[i] === sequence[i]) {
-                messageStatus.textContent = "It's a match!"
-                isPlayerTurn = false;
-                console.log("it's a match!")
-                i++;
-            } else {
-                messageStatus.textContent = "Wrong! Start Over"
-                isPlayerTurn = false;
-                console.log('not a match');
-            }
-        })
-    
+    // playerSequence.forEach(() => {
+    //         let i = 0;
+    //         if (playerSequence[i] === sequence[i]) {
+    //             messageStatus.textContent = "It's a match!"
+    //             isPlayerTurn = false;
+    //             console.log("it's a match!")
+    //             i++;
+    //             updateSequence();
+    //         } else {
+    //             messageStatus.textContent = "Wrong! Start Over"
+    //             isPlayerTurn = false;
+    //             console.log('not a match');
+    //             return;
+    //         }
+    //     })
 
     // if (playerSequence !== sequence) {
     //     messageStatus.textContent = "Wrong! Start Over"
