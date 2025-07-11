@@ -37,91 +37,62 @@ colorButtons.addEventListener('click', playerClick) // <---- THIS IS THE CORRECT
 
 
 function render() {
-   
+
 }
 
-// game begins by computer choosing one color button
+// computer begins by computer choosing one color button
 function startGame() {
     sequence = [];
     playerSequence = []
     isPlayerTurn = false;
-    flash();
    messageStatus.textContent = 'Watch the sequence...'; //*********** something isn't working with message
    updateSequence();
 }
 
-// function getRandom() {
-//     const randomColor = colorsArray[Math.floor(Math.random() * colorsArray.length)]
-//     return colorsArray[randomColor];
-// }
-
 function updateSequence() {
     playerSequence = [];
     isPlayerTurn = false;
+    messageStatus.textContent = "Watch the sequence..."
     if (sequence.length < 100) {
     const randomColor = colorsArray[Math.floor(Math.random() * colorsArray.length)];
     sequence.push(randomColor);
-
-    let delay = 0;
-    for (let i = 0; i < sequence.length; i++) {
-        setTimeout (() => {
-            flash(sequence[i], 'white'); // should flash white
-        }, delay); delay += 600;
-    }
-        
+    
     console.log('new color added:', randomColor);
     console.log('Sequence length:', sequence.length);
     console.log('current sequence:', sequence);
     }
+    let delay = 2000; // 2 seconds?
+
+    for (let i = 0; i < sequence.length; i++) {
+        flash(sequence[i], 'white', delay); // should flash white
+        delay += 800; // 8/10 or 800/1000ths of a second?
+    }
     
-    if (isPlayerTurn = true) ;
-        return messageStatus.textContent = "Repeat the sequence!";
-}
+    setTimeout(() => {
+        isPlayerTurn = true;
+        messageStatus.textContent = "Repeat the sequence!"
+    }, delay);
+  }
 
-// function computerFlash() {
-//     for (let i= 0; i < colorDivs.length; i++) {
-//         let delay = 0;
-//         if (colorDivs[i].id === sequence[i]) {
-//             colorDivs[i].style.backgroundColor = 'white';
-//             setTimeout(() => {
-//             colorDivs[i].removeAttribute('style');
-//         } , delay);
-//             delay += 600;
-//         console.log('selected', colorDivs[i])
-//         }
-//     }
-// }   // <-------- switched from forEach loop with help from chatgpt, much better for me!!!!!!
 
-// function nextSequence() {
-// //     updateSequence();
 
-//     isPlayerTurn = false;
-//     let delay = 0;
-// }
-
-//FLASH COLOR TO PLAYERSEQUENCE:
-// function Flash(event) {
-//     //const colorId = document.getElementById(color);
-//     event.target.style.backgroundColor = 'black';
-//     setTimeout (() => {
-//         event.target.removeAttribute('style');
-//     }, 200);
-// }
-
-function flash(color, flashColor) {
+function flash(color, flashColor, delay) {
     for (let i= 0; i < colorDivs.length; i++) {
         if (colorDivs[i].id === color) {
-        colorDivs[i].style.backgroundColor = flashColor;
+            setTimeout(() => {
+                colorDivs[i].style.backgroundColor = flashColor;
 
+            setTimeout(() => {
+                colorDivs[i].removeAttribute('style');
+            }, 500);
+
+        }, delay)
         /* PLACEHOLDER FOR SOUND EFFECTS!!!!!!!
         const soundeffect = new Audio(`sounds/${}.mp3`)
         soundeffect.play();
-        */
 
-        setTimeout(() => {
-            colorDivs[i].removeAttribute('style');
-        }, 500);
-        console.log("color flashing:", flashColor)
+        // add a /sounds/ folder with mp3 files named with corresponding colors?
+        */
     }
 }
 }
@@ -131,7 +102,6 @@ function flash(color, flashColor) {
 // player sequence < computer sequence then don't compare
 function playerClick (event) {
     isPlayerTurn = true;
-    messageStatus.textContent = "Repeat the sequence!";
 
     const clickedColor = event.target.id;
     flash(clickedColor, 'black'); // player clicks color
@@ -152,11 +122,31 @@ function playerClick (event) {
         messageStatus.textContent = "It's a match!"
         }
     
-    
     updateSequence();
-
     render();
 }
+
+// HELP FROM DEVIN******* NOT SURE?
+// function PlayerEndTurnDelay(){};
+//     if playerWin(){endPlayerTurn};
+
+// function endplayerturn(){
+
+// }
+// function sleep(){
+//     setTimeout(resolve, 1000);
+// }
+// function endPlayerTurn(){
+//     let counter = 0;
+//     while counter < 5 {sleep(); counter++}
+//     while ()
+//     do (sleep() );
+// }
+// ^^^^help suggestions start
+
+// start game over
+// counter vs timeout?
+
 
     // if (playerSequence.length === sequence.length &&
     //     playerSequence[currentClick] === sequence[currentClick]) {
@@ -214,14 +204,6 @@ function playerClick (event) {
     //    if seq === player seq then establish winning/next round
 
 
-// colorButtons.forEach(function(color) {
-// color.addEventListener('click', playSequence);
-//     if (!isPlayerTurn);
-//     const choice = color.id;
-
-//     console.log(choice)
-// })
-
 
 
 
@@ -253,6 +235,36 @@ function playerClick (event) {
 
 
 // GRAVEYARDDDDDD
+
+// function computerFlash() {
+//     for (let i= 0; i < colorDivs.length; i++) {
+//         let delay = 0;
+//         if (colorDivs[i].id === sequence[i]) {
+//             colorDivs[i].style.backgroundColor = 'white';
+//             setTimeout(() => {
+//             colorDivs[i].removeAttribute('style');
+//         } , delay);
+//             delay += 600;
+//         console.log('selected', colorDivs[i])
+//         }
+//     }
+// }   // <-------- switched from forEach loop with help from chatgpt, much better for me!!!!!!
+
+// function nextSequence() {
+// //     updateSequence();
+
+//     isPlayerTurn = false;
+//     let delay = 0;
+// }
+
+//FLASH COLOR TO PLAYERSEQUENCE:
+// function Flash(event) {
+//     //const colorId = document.getElementById(color);
+//     event.target.style.backgroundColor = 'black';
+//     setTimeout (() => {
+//         event.target.removeAttribute('style');
+//     }, 200);
+// }
 
 // function getRandom() {
 //     const randomColor = colorsArray[Math.floor(Math.random() * colorsArray.length)];
