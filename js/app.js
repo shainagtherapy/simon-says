@@ -126,7 +126,13 @@ function playerClick (event) {
     render();
 }
 
-// HELP FROM DEVIN******* NOT SURE?
+
+
+
+
+
+// GRAVEYARDDDDDD
+// HELP FROM DEV******* NOT SURE?
 // function PlayerEndTurnDelay(){};
 //     if playerWin(){endPlayerTurn};
 
@@ -205,36 +211,6 @@ function playerClick (event) {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// GRAVEYARDDDDDD
 
 // function computerFlash() {
 //     for (let i= 0; i < colorDivs.length; i++) {
