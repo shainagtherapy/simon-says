@@ -12,12 +12,11 @@ const colorsArray = ['blue', 'yellow', 'green', 'red'];
 let sequence = [];
 let playerSequence = [];
 let isPlayerTurn;
-
+let level = 1;
 
 /*------------------------ Cached Element References ------------------------*/
 
 const colorButtons = document.querySelector('.gameboard');
-
 const colorDivs = document.querySelectorAll('.color');
 const messageStatus = document.querySelector('#message');
 const startButton = document.querySelector('#start')
@@ -32,25 +31,33 @@ startButton.addEventListener('click', startGame);
 colorButtons.addEventListener('click', playerClick) // <---- THIS IS THE CORRECT EVENT LISTENER
 // !!!!!!!!!!!!!!!!!!!!!!!!!
 
+
+//******** try an empty color button click:
+//  also use likesCount from dom Events for a level up?
+//  */
 /*-------------------------------- Functions --------------------------------*/
 
 
 
 function render() {
+    disableClick();
     sequence = [];
     playerSequence = [];
     isPlayerTurn = false;
+    messageStatus.textContent = "Game reset. Click start to play again!"
     level = 1;
-    
 }
 
 // computer begins by computer choosing one color button
 function startGame() {
+    enableClick()
     sequence = [];
     playerSequence = []
     isPlayerTurn = false;
-   messageStatus.textContent = 'Watch the sequence...';
-   updateSequence();
+    messageStatus.textContent = 'Watch the sequence...';
+    updateSequence();
+    const levelCounter = document.createElement('h3');
+    levelCounter.textcontent = `${level}`;
 }
 
 function updateSequence() {
@@ -98,24 +105,26 @@ function flash(color, flashColor, delay) {
         // add a /sounds/ folder with mp3 files named with corresponding colors?
         */
     }
+    }
 }
-}
+
 
 
 function enableClick() {
-    colorButtons.addEventListener('click', playerClick)
+    colorButtons.style.opacity = '1';
+    colorButtons.addEventListener('click', playerClick);
+    console.log('enableClick check!')
 }
 
 function disableClick() {
-    colorButtons.removeEventListener('click', playerClick);
+    colorButtons.style.opacity = '0.5';
+    colorButtons.removeEventListener('click', playerClick)
 }
 
 
 
-function playerClick (event) {
+function playerClick(event) {
     isPlayerTurn = true;
-    
-    enableClick();
 
     const clickedColor = event.target.id;
     flash(clickedColor, 'black'); // player clicks color
@@ -123,9 +132,9 @@ function playerClick (event) {
     playerSequence.push(clickedColor);
 
     const currentClick = (playerSequence.length - 1);
-
+    
     // WIN/LOSS LOGIC: *******************************************
-    if (playerSequence[currentClick] != sequence[currentClick]) {
+    if (playerSequence[currentClick] !== sequence[currentClick]) {
         messageStatus.textContent = "Wrong! Start Over...";
         isPlayerTurn = false;
         disableClick();
@@ -134,7 +143,8 @@ function playerClick (event) {
         return;
     } else if (playerSequence[currentClick] === sequence[currentClick] &&
         playerSequence.length === sequence.length) {
-        messageStatus.textContent = "It's a match!"
+        messageStatus.textContent = "Next level!";
+        level = (level + 1);
         isPlayerTurn = false;
         updateSequence()
     }
@@ -142,6 +152,48 @@ function playerClick (event) {
     // updateSequence();
     // render();
 }
+
+function render() {
+    disableClick();
+    sequence = [];
+    playerSequence = [];
+    isPlayerTurn = false;
+    messageStatus.textContent = "Game reset. Click start to play again!"
+    level = 1;
+}
+
+
+/* TO DO 7/12
+
+- render() to reset the game and enable the start button
+- after start button, enable player clicks AND disable start button for the rest of the game
+- add level counter for each matching player sequence
+- add 3 second countdown timer when start button initializes the game
+- sound effects (required feature per game choice)
+
+add ons:
+- change colors and highlighting effects
+- speed up player click highlights
+- cap the game at level 20
+
+
+questions:
+- if the render() function resets the board, which begins with the 'start button',
+    I shouldn't need a second button?
+
+*/
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
