@@ -37,7 +37,8 @@ colorButtons.addEventListener('click', playerClick) // <---- THIS IS THE CORRECT
 //  */
 /*-------------------------------- Functions --------------------------------*/
 
-
+//if (isPlayerTurn = false)
+//    colorButtons.removeEventListener('click', playerClick);
 
 function render() {
     disableClick();
@@ -50,7 +51,7 @@ function render() {
 
 // computer begins by computer choosing one color button
 function startGame() {
-    enableClick()
+    colorButtons.style.opacity = '1';
     sequence = [];
     playerSequence = []
     isPlayerTurn = false;
@@ -72,7 +73,7 @@ function updateSequence() {
     console.log('Sequence length:', sequence.length);
     console.log('current sequence:', sequence);
     }
-    let delay = 2000; // 2 seconds?
+    let delay = 1500; // 2 seconds?
 
     for (let i = 0; i < sequence.length; i++) {
         flash(sequence[i], 'white', delay); // should flash white
@@ -83,6 +84,8 @@ function updateSequence() {
         isPlayerTurn = true;
         messageStatus.textContent = "Repeat the sequence!"
     }, delay);
+
+    enableClick();
   }
 
 
@@ -91,7 +94,7 @@ function flash(color, flashColor, delay) {
     for (let i= 0; i < colorDivs.length; i++) {
         if (colorDivs[i].id === color) {
             setTimeout(() => {
-                colorDivs[i].style.backgroundColor = flashColor;
+                colorDivs[i].style.borderColor= flashColor;
 
             setTimeout(() => {
                 colorDivs[i].removeAttribute('style');
@@ -111,9 +114,9 @@ function flash(color, flashColor, delay) {
 
 
 function enableClick() {
-    colorButtons.style.opacity = '1';
+    //colorButtons.style.opacity = '1';
     colorButtons.addEventListener('click', playerClick);
-    console.log('enableClick check!')
+    //console.log('enableClick check!')
 }
 
 function disableClick() {
@@ -127,7 +130,7 @@ function playerClick(event) {
     isPlayerTurn = true;
 
     const clickedColor = event.target.id;
-    flash(clickedColor, 'black'); // player clicks color
+    flash(clickedColor, 'cyan'); // player clicks color
 
     playerSequence.push(clickedColor);
 
