@@ -22,23 +22,23 @@ body {
     cursor: pointer;
 }
 
-#blue {
-    background-color: rgb(8, 0, 255);
-    border-color: black;
-}
-
 #yellow {
-    background-color: yellow;
+    background-color: rgb(255, 238, 0);
     border-color: black;
 }
 
-#green {
-    background-color: greenyellow;
+#purple {
+    background-color: rgb(110, 0, 254);
+    border-color: black;
+}
+
+#blue {
+    background-color: rgb(0, 157, 255);
     border-color: black;
 
 }
 
 #red {
-    background-color: rgb(255, 0, 0);
+    background-color: rgb(255, 49, 49);
     border-color: black;
 }

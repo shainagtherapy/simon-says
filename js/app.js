@@ -2,7 +2,7 @@
 /*-------------------------------- Constants --------------------------------*/
 
 // user landing page with color buttons.
-const colorsArray = ['blue', 'yellow', 'green', 'red'];
+const colorsArray = ['cyan', 'pink', 'blue', 'red'];
 
 // formula for random color pick - cross checked on MDN, Google & Chatgpt
 //const randomColor = colorsArray[Math.floor(Math.random() * colorsArray.length)]
@@ -59,7 +59,9 @@ function startGame() {
     updateSequence();
     const levelCounter = document.createElement('h3');
     levelCounter.textcontent = `${level}`;
+    
 }
+
 
 function updateSequence() {
     playerSequence = [];
@@ -76,7 +78,7 @@ function updateSequence() {
     let delay = 1500; // 2 seconds?
 
     for (let i = 0; i < sequence.length; i++) {
-        flash(sequence[i], 'white', delay); // should flash white
+        flash(sequence[i], 'magenta', delay); // should flash white
         delay += 800; // 8/10 or 800/1000ths of a second?
     }
     
@@ -86,7 +88,7 @@ function updateSequence() {
     }, delay);
 
     enableClick();
-  }
+    }
 
 
 
@@ -94,11 +96,11 @@ function flash(color, flashColor, delay) {
     for (let i= 0; i < colorDivs.length; i++) {
         if (colorDivs[i].id === color) {
             setTimeout(() => {
-                colorDivs[i].style.borderColor= flashColor;
+                colorDivs[i].style.borderColor = flashColor;
 
             setTimeout(() => {
                 colorDivs[i].removeAttribute('style');
-            }, 500);
+            }, 300);
 
         }, delay)
         /* PLACEHOLDER FOR SOUND EFFECTS!!!!!!!
@@ -177,6 +179,7 @@ function render() {
 add ons:
 - change colors and highlighting effects
 - speed up player click highlights
+- fade in messages/ message changes
 - cap the game at level 20
 
 
