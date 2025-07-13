@@ -46,8 +46,8 @@ function startGame() {
     playerSequence = []
     isPlayerTurn = false;
     messageStatus.textContent = 'Watch the sequence...';
+    levelDisplay.textContent = `Round 1 / 20`;
     updateSequence();
-    
 }
 
 
@@ -73,8 +73,9 @@ function updateSequence() {
     
     setTimeout(() => {
         isPlayerTurn = true;
+        delay;
         messageStatus.textContent = "Repeat the sequence!"
-    }, delay);
+    }, delay); /////////******is this delay actually working or not? */
 
     enableClick();
 
@@ -135,7 +136,7 @@ function playerClick(event) {
     isPlayerTurn = true;
 
     const clickedColor = event.target.id;
-    flash(clickedColor); // player clicks color
+    flash(clickedColor, '#fff3c2'); // player clicks color
 
     playerSequence.push(clickedColor);
 
@@ -158,13 +159,14 @@ function playerClick(event) {
     } else if (playerSequence[currentClick] === sequence[currentClick] &&
         playerSequence.length === sequence.length) {
         level = (level + 1); // or level++
-        messageStatus.textContent = "Next level!";
+        levelDisplay.textContent = `Round ${level} / 20`;
         isPlayerTurn = false;
         updateSequence()
 
     } else (playerSequence[currentClick] === sequence[currentClick] &&
         playerSequence.length === sequence.length && // also current clicks match?
-        level === 20) 
+        level === 20);
+        messageStatus.textContent = "CHAMPION!!!";
 
     }
     
