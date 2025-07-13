@@ -19,6 +19,7 @@ let level = 1;
 const colorButtons = document.querySelector('.gameboard');
 const colorDivs = document.querySelectorAll('.color');
 const messageStatus = document.querySelector('#message');
+const levelDisplay = document.querySelector('#level-message')
 const startButton = document.querySelector('#start')
 
 // user initializes the game to start
@@ -37,26 +38,6 @@ colorButtons.addEventListener('click', playerClick) // <---- THIS IS THE CORRECT
 //  */
 /*-------------------------------- Functions --------------------------------*/
 
-//if (isPlayerTurn = false)
-//    colorButtons.removeEventListener('click', playerClick);
-disableClick();
-
-// function render() {
-//     const wrongSound = new Audio('./sounds/wrong.mp3');
-//     wrongSound.play();
-//     console.log('wrong sound should play')
-
-    
-//     wrongSound.volume = 0.5;
-//     console.log(wrongSound.volume)
-
-//     disableClick();
-//     sequence = [];
-//     playerSequence = [];
-//     isPlayerTurn = false;
-//     messageStatus.textContent = "Game reset. Click start to play again!"
-//     level = 1;
-// }
 
 // computer begins by computer choosing one color button
 function startGame() {
@@ -66,8 +47,6 @@ function startGame() {
     isPlayerTurn = false;
     messageStatus.textContent = 'Watch the sequence...';
     updateSequence();
-    const levelCounter = document.createElement('h3');
-    levelCounter.textcontent = `${level}`;
     
 }
 
@@ -77,14 +56,14 @@ function updateSequence() {
     playerSequence = [];
     isPlayerTurn !== true;
     messageStatus.textContent = "Watch the sequence..."
-    if (sequence.length < 100) {
+    
     const randomColor = colorsArray[Math.floor(Math.random() * colorsArray.length)];
     sequence.push(randomColor);
     
     console.log('new color added:', randomColor);
     console.log('Sequence length:', sequence.length);
     console.log('current sequence:', sequence);
-    }
+    
     let delay = 1500; // 2 seconds?
 
     for (let i = 0; i < sequence.length; i++) {
@@ -182,7 +161,9 @@ function playerClick(event) {
         messageStatus.textContent = "Next level!";
         isPlayerTurn = false;
         updateSequence()
-    } else (playerSequence.length === sequence.length &&
+
+    } else (playerSequence[currentClick] === sequence[currentClick] &&
+        playerSequence.length === sequence.length && // also current clicks match?
         level === 20) 
 
     }
@@ -197,7 +178,6 @@ function render() {
     playerSequence = [];
     isPlayerTurn = false;
     messageStatus.textContent = "Game reset. Click start to play again!"
-    level = 1;
 }
 
 /* TO DO 7/12
