@@ -103,12 +103,18 @@ function updateSequence() {
 
 
 
-function flash(color, flashColor, delay) {
+function flash(color, flashColor = null, delay) {
     for (let i= 0; i < colorDivs.length; i++) {
         
         if (colorDivs[i].id === color) {
             setTimeout(() => {
-                colorDivs[i].style.borderColor = flashColor;
+                const div = colorDivs[i];
+                if (!flashColor) {
+                flashColor = getComputedStyle(div).backgroundColor;
+                }
+                
+                div.style.borderColor = flashColor;
+
             setTimeout(() => {
                 colorDivs[i].removeAttribute('style');
             }, 300);
@@ -150,7 +156,7 @@ function playerClick(event) {
     isPlayerTurn = true;
 
     const clickedColor = event.target.id;
-    flash(clickedColor, 'cyan'); // player clicks color
+    flash(clickedColor); // player clicks color
 
     playerSequence.push(clickedColor);
 
@@ -162,18 +168,23 @@ function playerClick(event) {
         
         isPlayerTurn = false;
         //disableClick();
-        
-    
-        
+        const wrongSound = new Audio('./sounds/wrong.mp3');
+        wrongSound.play();
+        console.log('wrong sound should play')
+        wrongSound.volume = 0.5;
+        console.log(wrongSound.volume)
         render();
     } else if (playerSequence.length < sequence.length) {
         return;
     } else if (playerSequence[currentClick] === sequence[currentClick] &&
         playerSequence.length === sequence.length) {
         messageStatus.textContent = "Next level!";
-        level = (level + 1);
+        level = (level + 1); // or level++
         isPlayerTurn = false;
         updateSequence()
+    } else (playerSequence.length === sequence.length &&
+        level === 20) {
+
     }
     
     // updateSequence();
@@ -181,14 +192,6 @@ function playerClick(event) {
 }
 
 function render() {
-    const wrongSound = new Audio('./sounds/wrong.mp3');
-    wrongSound.play();
-    console.log('wrong sound should play')
-
-    
-    wrongSound.volume = 0.5;
-    console.log(wrongSound.volume)
-
     disableClick();
     sequence = [];
     playerSequence = [];
