@@ -178,18 +178,18 @@ function playerClick(event) {
         return;
     } else if (playerSequence[currentClick] === sequence[currentClick] &&
         playerSequence.length === sequence.length) {
-        messageStatus.textContent = "Next level!";
         level = (level + 1); // or level++
+        messageStatus.textContent = "Next level!";
         isPlayerTurn = false;
         updateSequence()
     } else (playerSequence.length === sequence.length &&
-        level === 20) {
+        level === 20) 
 
     }
     
     // updateSequence();
     // render();
-}
+
 
 function render() {
     disableClick();
