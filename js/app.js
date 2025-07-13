@@ -39,15 +39,24 @@ colorButtons.addEventListener('click', playerClick) // <---- THIS IS THE CORRECT
 
 //if (isPlayerTurn = false)
 //    colorButtons.removeEventListener('click', playerClick);
+disableClick();
 
-function render() {
-    disableClick();
-    sequence = [];
-    playerSequence = [];
-    isPlayerTurn = false;
-    messageStatus.textContent = "Game reset. Click start to play again!"
-    level = 1;
-}
+// function render() {
+//     const wrongSound = new Audio('./sounds/wrong.mp3');
+//     wrongSound.play();
+//     console.log('wrong sound should play')
+
+    
+//     wrongSound.volume = 0.5;
+//     console.log(wrongSound.volume)
+
+//     disableClick();
+//     sequence = [];
+//     playerSequence = [];
+//     isPlayerTurn = false;
+//     messageStatus.textContent = "Game reset. Click start to play again!"
+//     level = 1;
+// }
 
 // computer begins by computer choosing one color button
 function startGame() {
@@ -64,6 +73,7 @@ function startGame() {
 
 
 function updateSequence() {
+    colorButtons.removeEventListener('click', playerClick);
     playerSequence = [];
     isPlayerTurn !== true;
     messageStatus.textContent = "Watch the sequence..."
@@ -88,6 +98,7 @@ function updateSequence() {
     }, delay);
 
     enableClick();
+
     }
 
 
@@ -103,9 +114,9 @@ function flash(color, flashColor, delay) {
             }, 300);
 
             const soundEffect = new Audio(`./sounds/${colorDivs[i].id}.mp3`)
-                    soundEffect.volume = 0.5;
-                    soundEffect.play();
-                    console.log(soundEffect.volume)
+            soundEffect.play();
+            soundEffect.volume = 0.5;
+            console.log(soundEffect.volume)
 
         }, delay)
 
@@ -147,9 +158,13 @@ function playerClick(event) {
     
     // WIN/LOSS LOGIC: *******************************************
     if (playerSequence[currentClick] !== sequence[currentClick]) {
-        messageStatus.textContent = "Wrong! Start Over...";
+        //messageStatus.textContent = "Wrong! Start Over...";
+        
         isPlayerTurn = false;
-        disableClick();
+        //disableClick();
+        
+    
+        
         render();
     } else if (playerSequence.length < sequence.length) {
         return;
@@ -166,6 +181,14 @@ function playerClick(event) {
 }
 
 function render() {
+    const wrongSound = new Audio('./sounds/wrong.mp3');
+    wrongSound.play();
+    console.log('wrong sound should play')
+
+    
+    wrongSound.volume = 0.5;
+    console.log(wrongSound.volume)
+
     disableClick();
     sequence = [];
     playerSequence = [];
@@ -173,7 +196,6 @@ function render() {
     messageStatus.textContent = "Game reset. Click start to play again!"
     level = 1;
 }
-
 
 /* TO DO 7/12
 
