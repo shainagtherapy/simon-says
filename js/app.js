@@ -2,7 +2,7 @@
 /*-------------------------------- Constants --------------------------------*/
 
 // user landing page with color buttons.
-const colorsArray = ['cyan', 'pink', 'blue', 'red'];
+const colorsArray = ['yellow', 'purple', 'blue', 'red'];
 
 // formula for random color pick - cross checked on MDN, Google & Chatgpt
 //const randomColor = colorsArray[Math.floor(Math.random() * colorsArray.length)]
@@ -94,15 +94,22 @@ function updateSequence() {
 
 function flash(color, flashColor, delay) {
     for (let i= 0; i < colorDivs.length; i++) {
+        
         if (colorDivs[i].id === color) {
             setTimeout(() => {
                 colorDivs[i].style.borderColor = flashColor;
-
             setTimeout(() => {
                 colorDivs[i].removeAttribute('style');
             }, 300);
 
+            const soundEffect = new Audio(`./sounds/${colorDivs[i].id}.mp3`)
+                    soundEffect.volume = 0.5;
+                    soundEffect.play();
+                    console.log(soundEffect.volume)
+
         }, delay)
+
+        
         /* PLACEHOLDER FOR SOUND EFFECTS!!!!!!!
         const soundeffect = new Audio(`sounds/${}.mp3`)
         soundeffect.play();
