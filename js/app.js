@@ -45,11 +45,7 @@ function updateSequence() {
     const randomColor = colorsArray[Math.floor(Math.random() * colorsArray.length)];
     sequence.push(randomColor);
     
-    console.log('new color added:', randomColor);
-    console.log('Sequence length:', sequence.length);
-    console.log('current sequence:', sequence);
-    
-    let delay = 1500; // 2 seconds?
+    let delay = 1500;
 
     for (let i = 0; i < sequence.length; i++) {
         flash(sequence[i], 'cyan', delay); 
@@ -75,12 +71,11 @@ function flash(color, flashColor = null, delay) {
             const soundEffect = new Audio(`./sounds/${colorDivs[i].id}.mp3`)
                 soundEffect.play();
                 soundEffect.volume = 0.5;
-                console.log(soundEffect.volume)
             setTimeout(() => {
                 colorDivs[i].removeAttribute('style');
             }, 300);
             }, delay);
-        }  // setInterval method help from mdn
+        }
     }
 }
 
@@ -96,7 +91,7 @@ function playerClick(event) {
     isPlayerTurn = true;
 
     const clickedColor = event.target.id;
-    flash(clickedColor, 'magenta'); // player clicks color
+    flash(clickedColor, 'magenta');
 
     playerSequence.push(clickedColor);
 
@@ -122,7 +117,7 @@ function playerClick(event) {
                 winnerSound.volume = 0.5;
                 disableClick();
             } else 
-                {level = (level + 1); // or level++
+                {level = (level + 1);
                 levelDisplay.textContent = `Round ${level} / 20`;
                 isPlayerTurn = false;
                 updateSequence()
