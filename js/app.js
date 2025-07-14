@@ -66,7 +66,7 @@ function updateSequence() {
     let delay = 1500; // 2 seconds?
 
     for (let i = 0; i < sequence.length; i++) {
-        flash(sequence[i], 'magenta', delay); // should flash white
+        flash(sequence[i], 'cyan', delay); // should flash white
         delay += 800; // 8/10 or 800/1000ths of a second?
     }
     
@@ -120,7 +120,7 @@ function playerClick(event) {
     isPlayerTurn = true;
 
     const clickedColor = event.target.id;
-    flash(clickedColor, '#fff3c2'); // player clicks color
+    flash(clickedColor, 'magenta'); // player clicks color
 
     playerSequence.push(clickedColor);
 
