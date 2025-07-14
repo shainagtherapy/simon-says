@@ -5,9 +5,9 @@ BROWSER-BASED GAME PROJECT
 
 Simon Says, Bop-it!
 
-Pressing Start initializes the first round- watch the selected color button, then respond by clicking the same color, which will initialize the second round. 
+Pressing Start initializes the first round- watch the selected color button, then respond by clicking the same color, which will initialize the next round with a second color, the next will have a third, etc. 
 
-Each round will play the repeated sequence + new color, to which you must respond with the same sequence. If you repeat the sequence wrong, you lose and must START OVER.
+Each round will play the sequence + new color, to which you must respond with the same sequence. If you repeat the sequence wrong, you lose and must **START OVER**.
 
 Complete 20 rounds to win and become a champion!
 
@@ -20,6 +20,12 @@ I present Simon gameplay with Bop-it sound effects & color theme for a fun throw
 -mp3 sound effects from [101soundboards.com](http://101soundboards.com)
 
 -Logo design [Canva](http://canva.com)
+
+-Assistance with nesting, debugging, and crosschecking syntax with ChatGPT
+
+-reference to MDN for math.random(), setInterval() method, audio() construction, and disabling, timeout enabling.
+
+-reference to GA DOM maninupation for code generation 'Playing Audio in the Browser'
 
 ```
 Stretch Goals:

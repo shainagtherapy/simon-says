@@ -1,14 +1,10 @@
 
 /*-------------------------------- Constants --------------------------------*/
 
-// user landing page with color buttons.
 const colorsArray = ['yellow', 'purple', 'blue', 'red'];
 
-// formula for random color pick - cross checked on MDN, Google & Chatgpt
-//const randomColor = colorsArray[Math.floor(Math.random() * colorsArray.length)]
-
 /*-------------------------------- Variables --------------------------------*/
-// gamestart:
+
 let sequence = [];
 let playerSequence = [];
 let isPlayerTurn;
@@ -22,24 +18,14 @@ const messageStatus = document.querySelector('#message');
 const levelDisplay = document.querySelector('#level-message')
 const startButton = document.querySelector('#start')
 
-// user initializes the game to start
-
 /*----------------------------- Event Listeners -----------------------------*/
 
 startButton.addEventListener('click', startGame);
 
-// DO NOT DELETE!!!!!!!!!!!
-colorButtons.addEventListener('click', playerClick) // <---- THIS IS THE CORRECT EVENT LISTENER
-// !!!!!!!!!!!!!!!!!!!!!!!!!
+colorButtons.addEventListener('click', playerClick)
 
-
-//******** try an empty color button click:
-//  also use likesCount from dom Events for a level up?
-//  */
 /*-------------------------------- Functions --------------------------------*/
 
-
-// computer begins by computer choosing one color button
 function startGame() {
     colorButtons.style.opacity = '1';
     sequence = [];
@@ -66,21 +52,18 @@ function updateSequence() {
     let delay = 1500; // 2 seconds?
 
     for (let i = 0; i < sequence.length; i++) {
-        flash(sequence[i], 'cyan', delay); // should flash white
-        delay += 800; // 8/10 or 800/1000ths of a second?
+        flash(sequence[i], 'cyan', delay); 
+        delay += 800;
     }
     
     setTimeout(() => {
         isPlayerTurn = true;
         delay;
         messageStatus.textContent = "Repeat the sequence!"
-    }, delay); /////////******is this delay actually working or not? */
+    }, delay);
 
     enableClick();
-
     }
-
-
 
 function flash(color, flashColor = null, delay) {
     for (let i= 0; i < colorDivs.length; i++) {
@@ -96,15 +79,10 @@ function flash(color, flashColor = null, delay) {
             setTimeout(() => {
                 colorDivs[i].removeAttribute('style');
             }, 300);
-        }, delay);
-
-        
-        } //setInterval method help from mdn
+            }, delay);
+        }  // setInterval method help from mdn
     }
 }
-
-
-
 
 function enableClick() {
     colorButtons.addEventListener('click', playerClick);
@@ -113,8 +91,6 @@ function enableClick() {
 function disableClick() {
     colorButtons.removeEventListener('click', playerClick)
 }
-
-
 
 function playerClick(event) {
     isPlayerTurn = true;
@@ -126,7 +102,6 @@ function playerClick(event) {
 
     const currentClick = (playerSequence.length - 1);
     
-    // WIN/LOSS LOGIC: *******************************************
     if (playerSequence[currentClick] !== sequence[currentClick]) {
         isPlayerTurn = false;
         const wrongSound = new Audio('./sounds/wrong.mp3');
@@ -164,34 +139,14 @@ function render() {
     messageStatus.textContent = "Wrong! Press start to play again"
 }
 
-/* TO DO 7/12
-
-- after start button, enable player clicks AND disable start button for the rest of the game
-
-add ons:
-- fade in messages/ message changes
-- winning lights interval at level 20
-
-*/
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
 
 
 // GRAVEYARDDDDDD
-// HELP FROM DEV******* NOT SURE?
+
+// HELP FROM student******* NOT SURE?
 // function PlayerEndTurnDelay(){};
 //     if playerWin(){endPlayerTurn};
 
@@ -211,7 +166,6 @@ add ons:
 
 // start game over
 // counter vs timeout?
-
 
     // if (playerSequence.length === sequence.length &&
     //     playerSequence[currentClick] === sequence[currentClick]) {
@@ -261,15 +215,10 @@ add ons:
     //     //     playSequence();
     //     // }, 1000);
 
-   
-
     // check for winner:
     // foreach sequence
     //    nest player sequence
     //    if seq === player seq then establish winning/next round
-
-
-
 
 // function computerFlash() {
 //     for (let i= 0; i < colorDivs.length; i++) {
@@ -310,7 +259,6 @@ add ons:
 //     colorsArray.push(randomColor)
 // }
 
-
 //     sequence.push(randomColor);
 //     playerSequence = [];
 //     isPlayerTurn = false;
@@ -339,4 +287,4 @@ add ons:
 
 // sound function:
 // function playSound () { ***REFER TO DOM LEVEL UP
-// }
+// 
