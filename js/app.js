@@ -46,7 +46,7 @@ function startGame() {
     playerSequence = []
     isPlayerTurn = false;
     messageStatus.textContent = 'Watch the sequence...';
-    levelDisplay.textContent = `Round 1 / 20`;
+    levelDisplay.textContent = 'Round 1 / 20';
     updateSequence();
 }
 
@@ -88,11 +88,7 @@ function flash(color, flashColor = null, delay) {
         
         if (colorDivs[i].id === color) {
             setTimeout(() => {
-                const div = colorDivs[i];
-                if (!flashColor) {
-                flashColor = getComputedStyle(div).backgroundColor;
-                }
-                
+                const div = colorDivs[i];                
                 div.style.borderColor = flashColor;
 
             setTimeout(() => {
@@ -103,8 +99,8 @@ function flash(color, flashColor = null, delay) {
             soundEffect.play();
             soundEffect.volume = 0.5;
             console.log(soundEffect.volume)
-
-        }, delay)
+        }, delay);
+    } //setInterval method help from mdn
 
         
         /* PLACEHOLDER FOR SOUND EFFECTS!!!!!!!
@@ -115,7 +111,7 @@ function flash(color, flashColor = null, delay) {
         */
     }
     }
-}
+
 
 
 
@@ -154,22 +150,25 @@ function playerClick(event) {
         wrongSound.volume = 0.5;
         console.log(wrongSound.volume)
         render();
+
     } else if (playerSequence.length < sequence.length) {
         return;
     } else if (playerSequence[currentClick] === sequence[currentClick] &&
         playerSequence.length === sequence.length) {
-        level = (level + 1); // or level++
-        levelDisplay.textContent = `Round ${level} / 20`;
-        isPlayerTurn = false;
-        updateSequence()
-
-    } else (playerSequence[currentClick] === sequence[currentClick] &&
-        playerSequence.length === sequence.length && // also current clicks match?
-        level === 20);
-        messageStatus.textContent = "CHAMPION!!!";
-
+            if (level === 20) {
+                messageStatus.textContent = "CHAMPION!!!";
+                const winnerSound = new Audio('./sounds/winner.mp3');
+                winnerSound.play();
+                winnerSound.volume = 0.5;
+                disableClick();
+            } else 
+                {level = (level + 1); // or level++
+            levelDisplay.textContent = `Round ${level} / 20`;
+            isPlayerTurn = false;
+            updateSequence()
+            }
     }
-    
+}
     // updateSequence();
     // render();
 
