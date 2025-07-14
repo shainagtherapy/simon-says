@@ -27,6 +27,8 @@ I present Simon gameplay with Bop-it sound effects & color theme for a fun throw
 
 -reference to GA DOM maninupation for code generation 'Playing Audio in the Browser'
 
+-YouTube coding videos for styling inspiration
+
 ```
 Stretch Goals:
 * sharpen the timeouts and disabling of player functions when it's not the player turn

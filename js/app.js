@@ -21,7 +21,6 @@ const startButton = document.querySelector('#start')
 /*----------------------------- Event Listeners -----------------------------*/
 
 startButton.addEventListener('click', startGame);
-
 colorButtons.addEventListener('click', playerClick)
 
 /*-------------------------------- Functions --------------------------------*/
