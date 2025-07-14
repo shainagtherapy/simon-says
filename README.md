@@ -5,9 +5,13 @@ BROWSER-BASED GAME PROJECT
 
 Simon Says - Bopit!
 
-A mashup of simple call & repeat games that I remember from childhood- they are simple yet require you to stay focused, and you can play endlessly by yourself. I love the nostalgia trend of the 90's because I grew up in that era with the first electronic games! I present Simon gameplay with Bopit colors and sound effects for a fun throwback combo.
+A mashup of call & repeat games that I remember from childhood. I love the nostalgia trend of the 90's with the first electronic games because that's what I grew up with! I present Simon gameplay with Bopit colors and sound effects for a fun throwback combo.
 
+Attributions:
+-mp3 sound effects from 101soundboards.com
+-references from [MDN](https://developer.mozilla.org/en-US/)
 
+Technologies used: HTML, CSS, JavaScript.
 ```
 Stretch Goals:
 -sharpen the timeouts and disabling of player functions when it's not the player turn
