@@ -89,16 +89,16 @@ function flash(color, flashColor = null, delay) {
             setTimeout(() => {
                 const div = colorDivs[i];                
                 div.style.borderColor = flashColor;
-
+            const soundEffect = new Audio(`./sounds/${colorDivs[i].id}.mp3`)
+                soundEffect.play();
+                soundEffect.volume = 0.5;
+                console.log(soundEffect.volume)
             setTimeout(() => {
                 colorDivs[i].removeAttribute('style');
             }, 300);
-
-            const soundEffect = new Audio(`./sounds/${colorDivs[i].id}.mp3`)
-            soundEffect.play();
-            soundEffect.volume = 0.5;
-            console.log(soundEffect.volume)
         }, delay);
+
+        
         } //setInterval method help from mdn
     }
 }
