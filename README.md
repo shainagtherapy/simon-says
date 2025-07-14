@@ -2,6 +2,7 @@
 BROWSER-BASED GAME PROJECT
 
 ![SimonSaysBopItBanner](/images/SIMONSAYSBANNER.jpg)
+[GAME PLAY](https://shainagtherapy.github.io/simon-says/)
 
 Simon Says, Bop-it!
 
@@ -12,6 +13,9 @@ Each round will play the sequence + new color, to which you must respond with th
 Complete 20 rounds to win and become a champion!
 
 I present Simon gameplay with Bop-it sound effects & color theme for a fun throwback combo. A mashup of call & repeat games that I remember from childhood. I love the nostalgia trend of the 90's with the first electronic games because that's what I grew up with! 
+
+[GitHub Repository](https://github.com/shainagtherapy/simon-says)
+
 
 **Technologies used:** HTML, CSS, JavaScript.
 
@@ -32,6 +36,7 @@ I present Simon gameplay with Bop-it sound effects & color theme for a fun throw
 ```
 Stretch Goals:
 * sharpen the timeouts and disabling of player functions when it's not the player turn
-* create a rapid flashing button interval to celebrate winning the last round
+* create a rapid flashing-button-interval to celebrate winning the last round
 * add more audio banter sound effects to cycle through when you lose
+* speed up Simon's sequence as the levels get higher for greater challenge
 ```
