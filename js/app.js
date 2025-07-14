@@ -12,7 +12,7 @@ const colorsArray = ['yellow', 'purple', 'blue', 'red'];
 let sequence = [];
 let playerSequence = [];
 let isPlayerTurn;
-let level = 1;
+let level;
 
 /*------------------------ Cached Element References ------------------------*/
 
@@ -47,14 +47,13 @@ function startGame() {
     isPlayerTurn = false;
     messageStatus.textContent = 'Watch the sequence...';
     levelDisplay.textContent = 'Round 1 / 20';
+    level = 1;
     updateSequence();
 }
 
-
 function updateSequence() {
-    colorButtons.removeEventListener('click', playerClick);
     playerSequence = [];
-    isPlayerTurn !== true;
+    isPlayerTurn = false;
     messageStatus.textContent = "Watch the sequence..."
     
     const randomColor = colorsArray[Math.floor(Math.random() * colorsArray.length)];
@@ -100,29 +99,18 @@ function flash(color, flashColor = null, delay) {
             soundEffect.volume = 0.5;
             console.log(soundEffect.volume)
         }, delay);
-    } //setInterval method help from mdn
-
-        
-        /* PLACEHOLDER FOR SOUND EFFECTS!!!!!!!
-        const soundeffect = new Audio(`sounds/${}.mp3`)
-        soundeffect.play();
-
-        // add a /sounds/ folder with mp3 files named with corresponding colors?
-        */
+        } //setInterval method help from mdn
     }
-    }
+}
 
 
 
 
 function enableClick() {
-    //colorButtons.style.opacity = '1';
     colorButtons.addEventListener('click', playerClick);
-    //console.log('enableClick check!')
 }
 
 function disableClick() {
-    colorButtons.style.opacity = '0.5';
     colorButtons.removeEventListener('click', playerClick)
 }
 
@@ -140,20 +128,17 @@ function playerClick(event) {
     
     // WIN/LOSS LOGIC: *******************************************
     if (playerSequence[currentClick] !== sequence[currentClick]) {
-        //messageStatus.textContent = "Wrong! Start Over...";
-        
         isPlayerTurn = false;
-        //disableClick();
         const wrongSound = new Audio('./sounds/wrong.mp3');
         wrongSound.play();
-        console.log('wrong sound should play')
         wrongSound.volume = 0.5;
-        console.log(wrongSound.volume)
         render();
 
     } else if (playerSequence.length < sequence.length) {
         return;
-    } else if (playerSequence[currentClick] === sequence[currentClick] &&
+
+    } else if 
+        (playerSequence[currentClick] === sequence[currentClick] &&
         playerSequence.length === sequence.length) {
             if (level === 20) {
                 messageStatus.textContent = "CHAMPION!!!";
@@ -163,45 +148,31 @@ function playerClick(event) {
                 disableClick();
             } else 
                 {level = (level + 1); // or level++
-            levelDisplay.textContent = `Round ${level} / 20`;
-            isPlayerTurn = false;
-            updateSequence()
-            }
+                levelDisplay.textContent = `Round ${level} / 20`;
+                isPlayerTurn = false;
+                updateSequence()
+                }
     }
 }
-    // updateSequence();
-    // render();
-
 
 function render() {
     disableClick();
+    colorButtons.style.opacity = '0.5';
     sequence = [];
     playerSequence = [];
     isPlayerTurn = false;
-    messageStatus.textContent = "Game reset. Click start to play again!"
+    messageStatus.textContent = "Wrong! Press start to play again"
 }
 
 /* TO DO 7/12
 
-- render() to reset the game and enable the start button
 - after start button, enable player clicks AND disable start button for the rest of the game
-- add level counter for each matching player sequence
-- add 3 second countdown timer when start button initializes the game
-- sound effects (required feature per game choice)
 
 add ons:
-- change colors and highlighting effects
-- speed up player click highlights
 - fade in messages/ message changes
-- cap the game at level 20
-
-
-questions:
-- if the render() function resets the board, which begins with the 'start button',
-    I shouldn't need a second button?
+- winning lights interval at level 20
 
 */
-
 
 
 

@@ -2,7 +2,6 @@ img {
     width: 350px;
     display: flex;
     margin: 0 auto;
-    padding: 0;
 }
 
 body {
@@ -33,24 +32,24 @@ body {
 #yellow {
     background-color: rgb(255, 238, 0);
     border-color: black;
-    border-radius: 100% 0 0 0;
+    border-radius: 100% 0 10% 0;
 }
 
 #purple {
     background-color: rgb(110, 0, 254);
     border-color: black;
-    border-radius: 0 100% 0 0;
+    border-radius: 0 100% 0 10%;
 }
 
 #blue {
     background-color: #0CC0DF;
     border-color: black;
-    border-radius: 0 0 0 100%;
+    border-radius: 0 10% 0 100%;
 
 }
 
 #red {
     background-color: rgb(255, 0, 136);
     border-color: black;
-    border-radius: 0 0 100% 0;
+    border-radius: 10% 0 100% 0;
 }
